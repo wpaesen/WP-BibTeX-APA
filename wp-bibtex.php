@@ -20,7 +20,7 @@ define('WP_BIBTEX_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('BIBTEX_ENTRIES', array(
     'article'           => array(
         'required'      => array('title', 'author', 'journal', 'year', 'volume'),
-        'optional'      => array('number', 'pages', 'month'),
+        'optional'      => array('number', 'pages', 'month', 'publisher'),
         'bibliography'  => '#{author}. #{title}. <em>#{journal}</em>, #{volume}[(#{number})][: #{pages}][ ,#{month}], #{year}.[ (IF=#{impact_factor})]',
     ),
     'book'              => array(
