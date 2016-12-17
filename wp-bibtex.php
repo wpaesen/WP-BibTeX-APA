@@ -271,6 +271,16 @@ function wp_bibtex_generate_styles_and_scripts() { ?>
     .wpbibtex-item .bibtex {
         display: none;
     }
+
+    .wpbibtex-item .bibtex pre {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        margin: 5px 0;
+        max-width: 100%;
+        overflow: auto;
+        padding: 12px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
 </style>
 <script type="text/javascript">
     (function($) {
