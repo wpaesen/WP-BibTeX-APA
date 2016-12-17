@@ -12,50 +12,52 @@ define('PLUGIN_PATH', plugin_dir_path(__FILE__));
 
 /**
  * The require and optional fileds of BibTex entries.
- * Ref: https://en.wikipedia.org/wiki/BibTeX
- * 
+ * Ref: 
+ * - https://en.wikipedia.org/wiki/BibTeX
+ * - https://verbosus.com/bibtex-style-examples.html
  * @var array
  */
 define('BIBTEX_ENTRIES', array(
-    'article'       => array(
-        'required'  => array('title', 'author', 'journal', 'year', 'volume'),
-        'optional'  => array('number', 'pages', 'month'),
+    'article'           => array(
+        'required'      => array('title', 'author', 'journal', 'year', 'volume'),
+        'optional'      => array('number', 'pages', 'month'),
+        'bibliography'  => '#{author}. #{title}. <em>#{journal}</em>, #{volume}[(#{number})][: #{pages}][ ,#{month}], #{year}.[ (IF=#{impact_factor})]',
     ),
-    'book'          => array(
-        'required'  => array('title', 'author', 'publisher', 'year'),
-        'optional'  => array('volume', 'number', 'series', 'edition', 'month', 'address'),
+    'book'              => array(
+        'required'      => array('title', 'author', 'publisher', 'year'),
+        'optional'      => array('volume', 'number', 'series', 'edition', 'month', 'address', 'isbn'),
+        'bibliography'  => '#{author}. <em>#{title}</em>.[ Vol. #{volume}.] #{publisher}[ ,#{address}][ ,#{month}], #{year}.',
     ),
-    'incollection'  => array(
-        'required'  => array('title', 'author', 'booktitle', 'publisher', 'year'),
-        'optional'  => array('volume', 'number', 'series', 'edition', 'pages', 'chapter', 'month', 'address'),
+    'inproceedings'       => array(
+        'required'      => array('title', 'author', 'booktitle', 'year'),
+        'optional'      => array('volume', 'number', 'series', 'pages', 'month', 'organization', 'publisher', 'address'),
+        'bibliography'  => '#{author}. #{title}. <em>#{booktitle}</em> [ ,Vol. #{volume}][ ,pages #{pages}][ ,#{address}][ ,#{month}], #{year}.[ #{publisher}.]',
     ),
-    'inproceedings' => array(
-        'required'  => array('title', 'author', 'booktitle', 'year'),
-        'optional'  => array('volume', 'number', 'series', 'pages', 'month', 'organization', 'publisher', 'address'),
+    'mastersthesis'     => array(
+        'required'      => array('title', 'author', 'school', 'year'),
+        'optional'      => array('month', 'address'),
+        'bibliography'  => '#{author}. #{title}. Master\'s thesis, #{school},[ ,#{address}][ ,#{month}], #{year}.',
     ),
-    'mastersthesis' => array(
-        'required'  => array('title', 'author', 'school', 'year'),
-        'optional'  => array('month', 'address'),
+    'phdthesis'         => array(
+        'required'      => array('title', 'author', 'school', 'year'),
+        'optional'      => array('month', 'address'),
+        'bibliography'  => '#{author}. <em>#{title}</em>. PhD thesis, #{school},[ ,#{address}][ ,#{month}], #{year}.',
     ),
-    'phdthesis'     => array(
-        'required'  => array('title', 'author', 'school', 'year'),
-        'optional'  => array('month', 'address'),
-    ),
-    'unpublished'   => array(
-        'required'  => array('title', 'author'),
-        'optional'  => array('year', 'month'),
+    'unpublished'       => array(
+        'required'      => array('title', 'author'),
+        'optional'      => array('year', 'month'),
+        'bibliography'  => '#{author}. #{title}.[ #{month}, #{year}.]',
     ),
 ));
 
 /**
  * Additional fields displayed after [BibTex] link.
  * By default, [Download PDF] is displayed.
- * 
  * @todo Custumize these fields in option page
  * @var array
  */
 $additional_fields  = array(
-    'url'           => 'Download PDF',
+    'url'   => 'Download PDF',
 );
 
 /**
@@ -71,7 +73,7 @@ function wp_bibtex_shortcode($attrs, $content=null) {
     }
 
     $citation_key    = wp_bibtex_get_citation_key($attrs);
-    $bibtex_content  = wp_bibtex_get_mla_text($attrs);
+    $bibtex_content  = wp_bibtex_get_bibliography_text($attrs);
     $bibtex_content .= '<div class="wpbibtex-item">';
     $bibtex_content .= '<a href="javascript:void(0);" class="wpbibtex-trigger">[BibTeX]</a> ';
     $bibtex_content .= wp_bibtex_get_additional_fields($attrs);
@@ -107,7 +109,6 @@ function wp_bibtex_is_attrs_missing($attrs) {
 /**
  * Generate BibTeX citation key for the citation.
  * The citation key is a string like 'xie2016comparison'.
- * 
  * @param  array  $attrs: an array contains attributes of the citation
  * @return BibTeX citation key of the citation
  */
@@ -166,11 +167,56 @@ function multiexplode($delimiters, $string) {
 }
 
 /**
- * [wp_bibtex_get_mla_text description]
+ * Get bibliography style text using citation attributes.
  * @param  array  $attrs: an array contains attributes of the citation
- * @return [type]        [description]
+ * @return bibliography style text of the citation
  */
-function wp_bibtex_get_mla_text($attrs) {
+function wp_bibtex_get_bibliography_text($attrs) {
+    $citation_type  = $attrs['type'];
+    $bibliography   = BIBTEX_ENTRIES[$citation_type]['bibliography'];
+    $bibliography   = preg_replace_callback(
+        '|#\{[a-zA-Z_]+\}|',
+        function ($matches) use ($attrs) {
+            $attr_key       = substr($matches[0], 2, -1);
+            $attr_value     = $attrs[$attr_key];
+            if ( $attr_key == 'author' ) {
+                $attr_value = wp_bibtex_get_citation_authors_text($attr_value);
+            } else if ( $attr_key == 'pages' ) {
+                $attr_value = str_replace('--', '-', $attr_value);
+            }
+            return $attr_value;
+        },
+        $bibliography
+    );
+    return preg_replace_callback(
+        '|\[[.,:\-()= 0-9a-zA-Z]+\]|',
+        function ($matches) {
+            // Remove empty optional fields
+            if ( preg_match('|\[[.,:\-()pagesIF=Vol ]+\]|', $matches[0]) ) {
+                return '';
+            }
+            return substr($matches[0], 1, -1);
+        },
+        $bibliography
+    );
+}
+
+/**
+ * Convert BibTeX authors field into bibliography style.
+ * @param  string $author: the authors of the citation
+ * @return bibliography style authors string
+ */
+function wp_bibtex_get_citation_authors_text($author) {
+    $author_text = '';
+    $authors     = explode('and', $author);
+    foreach ( $authors as $author ) {
+        $names          = explode(',', $author);
+        $last_name      = trim($names[0]);
+        $first_name     = count($names) < 2 ? '' : trim($names[1]);
+        $author_name    = sprintf("%s %s", $first_name, $last_name);
+        $author_text   .= $author_name. ', ';
+    }
+    return rtrim($author_text, ', ');
 }
 
 /**
@@ -215,24 +261,6 @@ function wp_bibtex_get_bibtex_text($citation_key, $attrs) {
     }
     $bibtex_text       .= sprintf("\n}");
     return $bibtex_text;
-}
-
-/**
- * [wp_bibtex_get_citation_authors_text description]
- * @param  [type] $author [description]
- * @return [type]         [description]
- */
-function wp_bibtex_get_citation_authors_text($author) {
-    $author_text = '';
-    $authors     = explode('and', $author);
-    foreach ( $authors as $author ) {
-        $names          = explode(',', $author);
-        $last_name      = trim($names[0]);
-        $first_name     = count($names) < 2 ? '' : trim($names[1]);
-        $author_name    = sprintf("%s %s", $first_name, $last_name);
-        $author_text   .= $author_name. ', ';
-    }
-    return rtrim($author_text, ', ');
 }
 
 /**
