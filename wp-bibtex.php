@@ -8,7 +8,7 @@
  * Version: 1.0.0
  * License: GPL v2.0
  */
-define('PLUGIN_PATH', plugin_dir_path(__FILE__));
+define('WP_BIBTEX_PLUGIN_PATH', plugin_dir_path(__FILE__));
 
 /**
  * The require and optional fileds of BibTex entries.
