@@ -40,7 +40,7 @@ Currently, this plugin support following BibTeX entries types:
 ## article
 
 - **Required fields:** `type`, `title`, `author`, `journal`, `year`, `volume`
-- **Optional fields:** `number`, `pages`, `month`, `impact_factor`, `url`
+- **Optional fields:** `number`, `pages`, `month`, `publisher`, `impact_factor`, `url`
 - **Short code example:** `[WpBibTeX type="article" title="Title of the citation" author="First Name1, Last Name1 and First Name2, Last Name2 and First Name3, Last Name3" journal="Journal Name of the citation" year="2016" volumne="1" impact_factor="The impact factor of the journal" url="The download link of the article"]`
 
 ## book
@@ -51,8 +51,8 @@ Currently, this plugin support following BibTeX entries types:
 
 ## inproceedings
 
-- **Required fields:** 'title', 'author', 'booktitle', 'year'
-- **Optional fields:** 'volume', 'number', 'series', 'pages', 'month', 'organization', 'publisher', 'address', `url`
+- **Required fields:** `title`, `author`, `booktitle`, `year`
+- **Optional fields:** `volume`, `number`, `series`, `pages`, `month`, `organization`, `publisher`, `address`, `url`
 - **Short code example:** `[WpBibTeX type="inproceedings" title="Title of the citation" author="First Name1, Last Name1 and First Name2, Last Name2 and First Name3, Last Name3" booktitle="The name of the conference, such as CVPR" address="The address of the publisher" year="2016"]`
 
 ## mastersthesis
@@ -91,5 +91,8 @@ Researchers who need to display their publications in their homepage can use thi
 
 == Changelog ==
 
-= 1.0 =
+= 1.1.0 =
+* Highlight the blog owner himself/herself in bibiography text.
+
+= 1.0.0 =
 * Complete basic function for convert citation information to BibTex and bibiography style text.

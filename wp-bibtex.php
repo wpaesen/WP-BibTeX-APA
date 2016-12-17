@@ -5,10 +5,11 @@
  * Description: A plugin helps format BibTeX entries to display a bibliography or cite citations in WordPress.
  * Author: Haozhe Xie
  * Author URI: https://haozhexie.com
- * Version: 1.0.0
+ * Version: 1.1.0
  * License: GPL v2.0
  */
 define('WP_BIBTEX_PLUGIN_PATH', plugin_dir_path(__FILE__));
+require_once(WP_BIBTEX_PLUGIN_PATH . 'wp-bibtex-options.php');
 
 /**
  * The require and optional fileds of BibTex entries.
@@ -49,16 +50,6 @@ define('BIBTEX_ENTRIES', array(
         'bibliography'  => '#{author}. #{title}.[ #{month}, #{year}.]',
     ),
 ));
-
-/**
- * Additional fields displayed after [BibTex] link.
- * By default, [Download PDF] is displayed.
- * @todo Custumize these fields in option page
- * @var array
- */
-$additional_fields  = array(
-    'url'   => 'Download PDF',
-);
 
 /**
  * Generate information for a citation.
@@ -207,8 +198,10 @@ function wp_bibtex_get_bibliography_text($attrs) {
  * @return bibliography style authors string
  */
 function wp_bibtex_get_citation_authors_text($author) {
-    $author_text = '';
-    $authors     = explode('and', $author);
+    global $wp_bibtex_options;
+    $blog_owner_name    = $wp_bibtex_options['blog_owner_name'];
+    $author_text        = '';
+    $authors            = explode('and', $author);
     foreach ( $authors as $author ) {
         $names          = explode(',', $author);
         $last_name      = trim($names[0]);
@@ -216,7 +209,11 @@ function wp_bibtex_get_citation_authors_text($author) {
         $author_name    = sprintf("%s %s", $first_name, $last_name);
         $author_text   .= $author_name. ', ';
     }
-    return rtrim($author_text, ', ');
+    return str_replace(
+        $blog_owner_name, 
+        sprintf('<strong>%s</strong>', $blog_owner_name), 
+        rtrim($author_text, ', ')
+    );
 }
 
 /**
@@ -226,8 +223,9 @@ function wp_bibtex_get_citation_authors_text($author) {
  * @return a HTML string contains additional fields' links
  */
 function wp_bibtex_get_additional_fields($attrs) {
-    global $additional_fields;
-    $additional_fields_text         = '';
+    global $wp_bibtex_options;
+    $additional_fields          = $wp_bibtex_options['additional_fields'];
+    $additional_fields_text     = '';
     
     foreach ( $additional_fields as $additional_field_key => $additional_field_name ) {
         if ( array_key_exists($additional_field_key, $attrs) ) {
