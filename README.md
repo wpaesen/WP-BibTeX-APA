@@ -34,6 +34,17 @@ And the shortcode above will generate following contents in a page:
   pages={165--172}
 }
 ```
+## New Features in 2.x
+
+**In addition**, you can also customize links diaplayed in the page. By default, there're two links (`[BibTeX]` and `[Download PDF]`) for each citation. Now, you can add customized links in option page.
+
+Suppose you create a new field whose `Field Key` is `code` and `Field Name` is `Download Code`. Then you will use `code` attribute in the `[WpBibTeX]` shortcode as following:
+
+```
+[WpBibTeX type="article" ... code="https://link/to/the/code"]
+```
+
+In this page, a new link `[Download Code]` will be displayed after `[BibTeX]` link.
 
 # Supported BibTeX Entry Types
 
@@ -77,6 +88,10 @@ Currently, this plugin support following BibTeX entries types:
 
 # Screenshots
 
-## The preview of the output
+## The Preview of the Output
 
-![plugin-preview](https://cloud.githubusercontent.com/assets/1730504/21285146/c4fa9402-c46b-11e6-9927-7c55f40bf83c.png)
+![output-preview](https://cloud.githubusercontent.com/assets/1730504/21285146/c4fa9402-c46b-11e6-9927-7c55f40bf83c.png)
+
+## The Preview of the Option Page
+
+![option-page](https://cloud.githubusercontent.com/assets/1730504/21291629/f192ee04-c521-11e6-85df-eaf6823f5b1a.png)
