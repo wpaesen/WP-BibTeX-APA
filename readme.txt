@@ -4,7 +4,7 @@ Donate link: https://haozhexie.com/
 Tags: BibTeX, citation, paper
 Requires at least: 3.0.1
 Tested up to: 4.7
-Stable tag: 1.0.0
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,18 @@ And the shortcode above will generate following contents in a page:
   pages={165--172}
 }
 ```
+
+## New Features in 2.x
+
+**In addition**, you can also customize links diaplayed in the page. By default, there're two links (`[BibTeX]` and `[Download PDF]`) for each citation. Now, you can add customized links in option page.
+
+Suppose you create a new field whose `Field Key` is `code` and `Field Name` is `Download Code`. Then you will use `code` attribute in the `[WpBibTeX]` shortcode as following:
+
+```
+[WpBibTeX type="article" ... code="https://link/to/the/code"]
+```
+
+In this page, a new link `[Download Code]` will be displayed after `[BibTeX]` link.
 
 # Supported BibTeX Entry Types
 
@@ -87,9 +99,13 @@ Researchers who need to display their publications in their homepage can use thi
 
 == Screenshots ==
 
-1. Plugin Preview
+1. Output Preview
+2. Options Page
 
 == Changelog ==
+
+= 2.0.0 =
+* Support customize fields for citations and these fields will be displayed as a link in the page.
 
 = 1.1.0 =
 * Highlight the blog owner himself/herself in bibiography text.

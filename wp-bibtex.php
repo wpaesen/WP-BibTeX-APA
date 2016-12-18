@@ -5,7 +5,7 @@
  * Description: A plugin helps format BibTeX entries to display a bibliography or cite citations in WordPress.
  * Author: Haozhe Xie
  * Author URI: https://haozhexie.com
- * Version: 1.1.0
+ * Version: 2.0.0
  * License: GPL v2.0
  */
 define('WP_BIBTEX_PLUGIN_PATH', plugin_dir_path(__FILE__));
@@ -109,7 +109,7 @@ function wp_bibtex_get_citation_key($attrs) {
     $title              = $attrs['title'];
     $first_author       = explode('and', strtolower($author))[0];
     $last_name          = explode(',', $first_author)[0];
-    $title_words        = multiexplode(array(' ', '-', ':'), strtolower($title));
+    $title_words        = wp_bibtex_multiexplode(array(' ', '-', ':'), strtolower($title));
     $stop_words         = array(
         "a", "about", "above", "after", "again", "against", "all", "am", "an", 
         "and", "any", "are", "aren't", "as", "at", "be", "because", "been", 
@@ -151,7 +151,7 @@ function wp_bibtex_get_citation_key($attrs) {
  * @return an array of strings, each of which is a substring of string formed 
  *         by splitting it on boundaries formed by the delimiter.
  */
-function multiexplode($delimiters, $string) {
+function wp_bibtex_multiexplode($delimiters, $string) {
     $ready  = str_replace($delimiters, $delimiters[0], $string);
     $launch = explode($delimiters[0], $ready);
     return $launch;
