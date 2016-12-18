@@ -227,7 +227,9 @@ function wp_bibtex_get_additional_fields($attrs) {
     $additional_fields          = $wp_bibtex_options['additional_fields'];
     $additional_fields_text     = '';
     
-    foreach ( $additional_fields as $additional_field_key => $additional_field_name ) {
+    foreach ( $additional_fields as $additional_field ) {
+        $additional_field_key   = $additional_field['key'];
+        $additional_field_name  = $additional_field['value'];
         if ( array_key_exists($additional_field_key, $attrs) ) {
             $additional_field_value = $attrs[$additional_field_key];
             $additional_fields_text.= sprintf("<a href='%s'>[%s]</a> ", 
