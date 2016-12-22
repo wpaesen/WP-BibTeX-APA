@@ -16,12 +16,12 @@ function wp_bibtex_option_admin_menu() {
  * @todo Custumize these fields in option page
  * @var array
  */
-define('DEFAULT_ADDITIONAL_FIELDS', array(
+$DEFAULT_ADDITIONAL_FIELDS = array(
     array(
         'key'   => 'url',
         'value' => 'Download PDF'
     ),
-));
+);
 $additional_fields  = get_option('additional_fields');
 
 /**
@@ -36,7 +36,7 @@ $blog_owner_name    = get_option('blog_owner_name');
  */
 $wp_bibtex_options      = array(
     'blog_owner_name'   => !empty($blog_owner_name)   ? $blog_owner_name   : DEFAULT_BLOG_OWNER_NAME,
-    'additional_fields' => !empty($additional_fields) ? $additional_fields : DEFAULT_ADDITIONAL_FIELDS,
+    'additional_fields' => !empty($additional_fields) ? $additional_fields : $DEFAULT_ADDITIONAL_FIELDS,
 );
 
 function wp_bibtex_option_page() {

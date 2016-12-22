@@ -18,7 +18,7 @@ require_once(WP_BIBTEX_PLUGIN_PATH . 'wp-bibtex-options.php');
  * - https://verbosus.com/bibtex-style-examples.html
  * @var array
  */
-define('BIBTEX_ENTRIES', array(
+$BIBTEX_ENTRIES = array(
     'article'           => array(
         'required'      => array('title', 'author', 'journal', 'year', 'volume'),
         'optional'      => array('number', 'pages', 'month', 'publisher'),
@@ -49,7 +49,7 @@ define('BIBTEX_ENTRIES', array(
         'optional'      => array('year', 'month'),
         'bibliography'  => '#{author}. #{title}.[ #{month}, #{year}.]',
     ),
-));
+);
 
 /**
  * Generate information for a citation.
@@ -81,13 +81,14 @@ function wp_bibtex_shortcode($attrs, $content=null) {
  * @return an array contains name of missing attributes
  */
 function wp_bibtex_is_attrs_missing($attrs) {
+    global $BIBTEX_ENTRIES;
     $citation_type      = $attrs['type'];
     $missing_attributes = array();
 
-    if ( !array_key_exists($citation_type, BIBTEX_ENTRIES) ) {
+    if ( !array_key_exists($citation_type, $BIBTEX_ENTRIES) ) {
         array_push($missing_attributes, 'type');
     } else {
-        $required_fields = BIBTEX_ENTRIES[$citation_type]['required'];
+        $required_fields = $BIBTEX_ENTRIES[$citation_type]['required'];
         foreach ( $required_fields as $required_field ) {
             if ( !array_key_exists($required_field, $attrs) ) {
                 array_push($missing_attributes, $required_field);
@@ -163,8 +164,9 @@ function wp_bibtex_multiexplode($delimiters, $string) {
  * @return bibliography style text of the citation
  */
 function wp_bibtex_get_bibliography_text($attrs) {
+    global $BIBTEX_ENTRIES;
     $citation_type  = $attrs['type'];
-    $bibliography   = BIBTEX_ENTRIES[$citation_type]['bibliography'];
+    $bibliography   = $BIBTEX_ENTRIES[$citation_type]['bibliography'];
     $bibliography   = preg_replace_callback(
         '|#\{[a-zA-Z_]+\}|',
         function ($matches) use ($attrs) {
@@ -246,9 +248,10 @@ function wp_bibtex_get_additional_fields($attrs) {
  * @return BibTeX text fot the citation
  */
 function wp_bibtex_get_bibtex_text($citation_key, $attrs) {
+    global $BIBTEX_ENTRIES;
     $citation_type      = $attrs['type'];
-    $required_fields    = BIBTEX_ENTRIES[$citation_type]['required'];
-    $optional_fields    = BIBTEX_ENTRIES[$citation_type]['optional'];
+    $required_fields    = $BIBTEX_ENTRIES[$citation_type]['required'];
+    $optional_fields    = $BIBTEX_ENTRIES[$citation_type]['optional'];
     $bibtex_text        = sprintf("@%s{%s", $citation_type, $citation_key);
     foreach ( $required_fields as $field ) {
         $bibtex_text   .= sprintf(",\n  %s={%s}", $field, $attrs[$field]);
