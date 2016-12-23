@@ -5,7 +5,7 @@
  * Description: A plugin helps format BibTeX entries to display a bibliography or cite citations in WordPress.
  * Author: Haozhe Xie
  * Author URI: https://haozhexie.com
- * Version: 2.0.1
+ * Version: 2.1.0
  * License: GPL v2.0
  */
 define('WP_BIBTEX_PLUGIN_PATH', plugin_dir_path(__FILE__));
@@ -21,33 +21,33 @@ require_once(WP_BIBTEX_PLUGIN_PATH . 'wp-bibtex-options.php');
 $BIBTEX_ENTRIES = array(
     'article'           => array(
         'required'      => array('title', 'author', 'journal', 'year', 'volume'),
-        'optional'      => array('number', 'pages', 'month', 'publisher'),
-        'bibliography'  => '#{author}. #{title}. <em>#{journal}</em>, #{volume}[(#{number})][: #{pages}][ ,#{month}], #{year}.[ (IF=#{impact_factor})]',
+        'optional'      => array('number', 'pages', 'month', 'publisher', 'note'),
+        'bibliography'  => '#{author}. #{title}. <em>#{journal}</em>, #{volume}[(#{number})][: #{pages}][ ,#{month}], #{year}.[ (IF=#{impact_factor})][ #{note}]',
     ),
     'book'              => array(
         'required'      => array('title', 'author', 'publisher', 'year'),
-        'optional'      => array('volume', 'number', 'series', 'edition', 'month', 'address', 'isbn'),
-        'bibliography'  => '#{author}. <em>#{title}</em>.[ Vol. #{volume}.] #{publisher}[ ,#{address}][ ,#{month}], #{year}.',
+        'optional'      => array('volume', 'number', 'series', 'edition', 'month', 'address', 'isbn', 'note'),
+        'bibliography'  => '#{author}. <em>#{title}</em>.[ Vol. #{volume}.] #{publisher}[ ,#{address}][ ,#{month}], #{year}.[ #{note}]',
     ),
     'inproceedings'       => array(
         'required'      => array('title', 'author', 'booktitle', 'year'),
-        'optional'      => array('volume', 'number', 'series', 'pages', 'month', 'organization', 'publisher', 'address'),
-        'bibliography'  => '#{author}. #{title}. <em>#{booktitle}</em> [ ,Vol. #{volume}][ ,pages #{pages}][ ,#{address}][ ,#{month}], #{year}.[ #{publisher}.]',
+        'optional'      => array('volume', 'number', 'series', 'pages', 'month', 'organization', 'publisher', 'address', 'note'),
+        'bibliography'  => '#{author}. #{title}. <em>#{booktitle}</em> [ ,Vol. #{volume}][ ,pages #{pages}][ ,#{address}][ ,#{month}], #{year}.[ #{publisher}.][ #{note}]',
     ),
     'mastersthesis'     => array(
-        'required'      => array('title', 'author', 'school', 'year'),
+        'required'      => array('title', 'author', 'school', 'year', 'note'),
         'optional'      => array('month', 'address'),
-        'bibliography'  => '#{author}. #{title}. Master\'s thesis, #{school},[ ,#{address}][ ,#{month}], #{year}.',
+        'bibliography'  => '#{author}. #{title}. Master\'s thesis, #{school},[ ,#{address}][ ,#{month}], #{year}.[ #{note}]',
     ),
     'phdthesis'         => array(
-        'required'      => array('title', 'author', 'school', 'year'),
+        'required'      => array('title', 'author', 'school', 'year', 'note'),
         'optional'      => array('month', 'address'),
-        'bibliography'  => '#{author}. <em>#{title}</em>. PhD thesis, #{school},[ ,#{address}][ ,#{month}], #{year}.',
+        'bibliography'  => '#{author}. <em>#{title}</em>. PhD thesis, #{school},[ ,#{address}][ ,#{month}], #{year}.[ #{note}]',
     ),
     'unpublished'       => array(
         'required'      => array('title', 'author'),
-        'optional'      => array('year', 'month'),
-        'bibliography'  => '#{author}. #{title}.[ #{month}, #{year}.]',
+        'optional'      => array('year', 'month', 'note'),
+        'bibliography'  => '#{author}. #{title}.[ #{month}, #{year}.][ #{note}]',
     ),
 );
 

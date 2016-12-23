@@ -53,37 +53,37 @@ Currently, this plugin support following BibTeX entries types:
 ## article
 
 - **Required fields:** `type`, `title`, `author`, `journal`, `year`, `volume`
-- **Optional fields:** `number`, `pages`, `month`, `publisher`, `impact_factor`, `url`
+- **Optional fields:** `number`, `pages`, `month`, `publisher`, `impact_factor`, `url`, `note`
 - **Short code example:** `[WpBibTeX type="article" title="Title of the citation" author="First Name1, Last Name1 and First Name2, Last Name2 and First Name3, Last Name3" journal="Journal Name of the citation" year="2016" volumne="1" impact_factor="The impact factor of the journal" url="The download link of the article"]`
 
 ## book
 
 - **Required fields:** `type`, `title`, `author`, `publisher`, `year`
-- **Optional fields:** `volume`, `number`, `series`, `edition`, `month`, `address`, `isbn`, `url`
+- **Optional fields:** `volume`, `number`, `series`, `edition`, `month`, `address`, `isbn`, `url`, `note`
 - **Short code example:** `[WpBibTeX type="book" title="Title of the citation" author="First Name1, Last Name1 and First Name2, Last Name2 and First Name3, Last Name3" publisher="Publisher of the citation" year="2016" address="The address of the publisher" url="The download link of the article"]`
 
 ## inproceedings
 
 - **Required fields:** `title`, `author`, `booktitle`, `year`
-- **Optional fields:** `volume`, `number`, `series`, `pages`, `month`, `organization`, `publisher`, `address`, `url`
+- **Optional fields:** `volume`, `number`, `series`, `pages`, `month`, `organization`, `publisher`, `address`, `url`, `note`
 - **Short code example:** `[WpBibTeX type="inproceedings" title="Title of the citation" author="First Name1, Last Name1 and First Name2, Last Name2 and First Name3, Last Name3" booktitle="The name of the conference, such as CVPR" address="The address of the publisher" year="2016"]`
 
 ## mastersthesis
 
 - **Required fields:** `title`, `author`, `school`, `year`
-- **Optional fields:** `month`, `address`, `url`
+- **Optional fields:** `month`, `address`, `url`, `note`
 - **Short code example:** `[WpBibTeX type="mastersthesis" title="Title of the citation" author="First Name1, Last Name1" school="The place where the citation was written" year="2016"]`
 
 ## phdthesis
 
 - **Required fields:** `title`, `author`, `school`, `year`
-- **Optional fields:** `month`, `address`, `url`
+- **Optional fields:** `month`, `address`, `url`, `note`
 - **Short code example:** `[WpBibTeX type="mastersthesis" title="Title of the citation" author="First Name1, Last Name1" school="The place where the citation was written" year="2016"]`
 
 ## unpublished
 
 - **Required fields:** `title`, `author`
-- **Optional fields:** `month`, `year`, `url`
+- **Optional fields:** `month`, `year`, `url`, `note`
 - **Short code example:** `[WpBibTeX type="unpublished" title="Title of the citation" author="First Name1, Last Name1"]`
 
 # Screenshots
