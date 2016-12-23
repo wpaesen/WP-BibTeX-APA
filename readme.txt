@@ -4,7 +4,7 @@ Donate link: https://haozhexie.com/
 Tags: BibTeX, citation, paper
 Requires at least: 3.0.1
 Tested up to: 4.7
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,9 @@ Researchers who need to display their publications in their homepage can use thi
 2. Options Page
 
 == Changelog ==
+
+= 2.2.0 =
+* Allow use HTML tag in `note` field.
 
 = 2.1.0 =
 * Add field `note` for add custom text for citations.
