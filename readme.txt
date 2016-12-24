@@ -4,7 +4,7 @@ Donate link: https://haozhexie.com/
 Tags: BibTeX, citation, paper
 Requires at least: 3.0.1
 Tested up to: 4.7
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,7 +62,7 @@ Currently, this plugin support following BibTeX entries types:
 
 - **Required fields:** `title`, `author`, `booktitle`, `year`
 - **Optional fields:** `volume`, `number`, `series`, `pages`, `month`, `organization`, `publisher`, `address`, `url`, `note`
-- **Short code example:** `[WpBibTeX type="inproceedings" title="Title of the citation" author="First Name1, Last Name1 and First Name2, Last Name2 and First Name3, Last Name3" booktitle="The name of the conference, such as CVPR" address="The address of the publisher" year="2016"]`
+- **Short code example:** `[WpBibTeX type="inproceedings" title="Title of the citation" author="First Name1, Last Name1 and First Name2, Last Name2 and First Name3, Last Name3" booktitle="The name of the conference, such as CVPR" address="The address of the publisher" year="2016" note='<span style="color: red">write anything you want</span>']`
 
 *mastersthesis*
 
@@ -100,6 +100,9 @@ Researchers who need to display their publications in their homepage can use thi
 2. Options Page
 
 == Changelog ==
+
+= 2.2.1 =
+* Fix bugs in bibliography style text.
 
 = 2.2.0 =
 * Allow use HTML tag in `note` field.
