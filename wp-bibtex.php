@@ -5,7 +5,7 @@
  * Description: A plugin helps format BibTeX entries to display a bibliography or cite citations in WordPress.
  * Author: Haozhe Xie
  * Author URI: https://haozhexie.com
- * Version: 2.2.2
+ * Version: 2.2.3
  * License: GPL v2.0
  */
 define('WP_BIBTEX_PLUGIN_PATH', plugin_dir_path(__FILE__));
@@ -269,36 +269,10 @@ function wp_bibtex_get_bibtex_text($citation_key, $attrs) {
 /**
  * Display essential JavaScript and CSS here.
  */
-function wp_bibtex_generate_styles_and_scripts() { ?>
-<style type="text/css">
-    .wpbibtex-item .bibtex {
-        display: none;
-    }
-
-    .wpbibtex-item .bibtex pre {
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        margin: 5px 0;
-        max-width: 100%;
-        overflow: auto;
-        padding: 12px;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-    }
-</style>
-<script type="text/javascript">
-    (function($) {
-        $('.wpbibtex-trigger').click(function() {
-            var bibtexInfoContainer = $('.bibtex', $(this).parent());
-            if ( $(bibtexInfoContainer).is(':visible') ) {
-                $(bibtexInfoContainer).slideUp(250);
-            } else {
-                $(bibtexInfoContainer).slideDown(250);
-            }
-        });
-    })(jQuery);
-</script>
-<?php
+function wp_bibtex_generate_styles_and_scripts() { 
+    wp_enqueue_style('WP-BibTeX', plugins_url('assets/wp-bibtex.css', __FILE__), false, NULL, 'all');
+    wp_enqueue_script('WP-BibTeX', plugins_url('assets/wp-bibtex.js', __FILE__), array('jquery'), NULL, true);
 }
 
 add_shortcode('WpBibTeX', 'wp_bibtex_shortcode');
-add_action('shutdown', 'wp_bibtex_generate_styles_and_scripts');
+add_action('wp_enqueue_scripts', 'wp_bibtex_generate_styles_and_scripts');
