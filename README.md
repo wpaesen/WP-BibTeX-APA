@@ -18,7 +18,7 @@ The plugin generates bibiography style text of a citation with provided infomrat
 
 Here's an example. Please paste following shortcode in a page.
 
-`[WpBibTeX type="article" title="Comparison among dimensionality reduction techniques based on Random Projection for cancer classification" author="Xie, Haozhe and Li, Jie and Zhang, Qiaosheng and Wang, Yadong" journal="Computational biology and chemistry" year="2016" pages="165--172"  publisher="Elsevier" volume="65" impact_factor="1.014" url="//infinitescript.com/wordpress/wp-content/uploads/publications/xie2016comparison.pdf"]`
+`[WpBibTeX type="article" title="Comparison among dimensionality reduction techniques based on Random Projection for cancer classification" author="Xie, Haozhe and Li, Jie and Zhang, Qiaosheng and Wang, Yadong" journal="Computational biology and chemistry" year="2016" pages="165--172"  publisher="Elsevier" volume="65" note="(IF=1.014)" url="//infinitescript.com/wordpress/wp-content/uploads/publications/xie2016comparison.pdf"]`
 
 And the shortcode above will generate following contents in a page:
 
