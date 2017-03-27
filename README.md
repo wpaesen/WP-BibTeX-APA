@@ -54,7 +54,7 @@ Currently, this plugin support following BibTeX entries types:
 
 - **Required fields:** `type`, `title`, `author`, `journal`, `year`, `volume`
 - **Optional fields:** `number`, `pages`, `month`, `publisher`, `impact_factor`, `url`, `note`
-- **Short code example:** `[WpBibTeX type="article" title="Title of the citation" author="First Name1, Last Name1 and First Name2, Last Name2 and First Name3, Last Name3" journal="Journal Name of the citation" year="2016" volumne="1" impact_factor="The impact factor of the journal" url="The download link of the article"]`
+- **Short code example:** `[WpBibTeX type="article" title="Title of the citation" author="First Name1, Last Name1 and First Name2, Last Name2 and First Name3, Last Name3" journal="Journal Name of the citation" year="2016" volumne="1" url="The download link of the article" note="(IF=1.000)"]`
 
 ## book
 

@@ -3,8 +3,8 @@ Contributors: zjhzxhz
 Donate link: https://haozhexie.com/
 Tags: BibTeX, citation, paper
 Requires at least: 3.0.1
-Tested up to: 4.7
-Stable tag: 2.2.3
+Tested up to: 4.7.3
+Stable tag: 2.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ The plugin generates bibiography style text of a citation with provided infomrat
 
 Here's an example. Please paste following shortcode in a page.
 
-`[WpBibTeX type="article" title="Comparison among dimensionality reduction techniques based on Random Projection for cancer classification" author="Xie, Haozhe and Li, Jie and Zhang, Qiaosheng and Wang, Yadong" journal="Computational biology and chemistry" year="2016" pages="165--172"  publisher="Elsevier" volume="65" note="(IF=1.014)" url="//infinitescript.com/wordpress/wp-content/uploads/publications/xie2016comparison.pdf"]`
+`[WpBibTeX type="article" title="Comparison among dimensionality reduction techniques based on Random Projection for cancer classification" author="Xie, Haozhe and Li, Jie and Zhang, Qiaosheng and Wang, Yadong" journal="Computational biology and chemistry" year="2016" pages="165--172"  publisher="Elsevier" volume="65" url="//infinitescript.com/wordpress/wp-content/uploads/publications/xie2016comparison.pdf" note="(IF=1.014)"]`
 
 And the shortcode above will generate following contents in a page:
 
@@ -50,7 +50,7 @@ Currently, this plugin support following BibTeX entries types:
 
 - **Required fields:** `type`, `title`, `author`, `journal`, `year`, `volume`
 - **Optional fields:** `number`, `pages`, `month`, `publisher`, `url`, `note`
-- **Short code example:** `[WpBibTeX type="article" title="Title of the citation" author="First Name1, Last Name1 and First Name2, Last Name2 and First Name3, Last Name3" journal="Journal Name of the citation" year="2016" volumne="1" impact_factor="The impact factor of the journal" url="The download link of the article"]`
+- **Short code example:** `[WpBibTeX type="article" title="Title of the citation" author="First Name1, Last Name1 and First Name2, Last Name2 and First Name3, Last Name3" journal="Journal Name of the citation" year="2016" volumne="1" url="The download link of the article" note="(IF=1.000)"]`
 
 *book*
 
