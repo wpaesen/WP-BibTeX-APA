@@ -5,7 +5,7 @@
  * Description: A plugin helps format BibTeX entries to display a bibliography or cite citations in WordPress.
  * Author: Haozhe Xie
  * Author URI: https://haozhexie.com
- * Version: 2.2.3
+ * Version: 2.2.4
  * License: GPL v2.0
  */
 define('WP_BIBTEX_PLUGIN_PATH', plugin_dir_path(__FILE__));
@@ -20,9 +20,9 @@ require_once(WP_BIBTEX_PLUGIN_PATH . 'wp-bibtex-options.php');
  */
 $BIBTEX_ENTRIES = array(
     'article'           => array(
-        'required'      => array('title', 'author', 'journal', 'year', 'volume'),
+        'required'      => array('title', 'author', 'journal', 'year'),
         'optional'      => array('number', 'pages', 'month', 'publisher'),
-        'bibliography'  => '{{author}}. {{title}}. <em>{{journal}}</em>, {{volume}}[({{number}})][: {{pages}}][, {{month}}], {{year}}.[ {{note}}]',
+        'bibliography'  => '{{author}}. {{title}}. <em>{{journal}}</em>[, {{volume}}][({{number}})][: {{pages}}][, {{month}}], {{year}}.[ {{note}}]',
     ),
     'book'              => array(
         'required'      => array('title', 'author', 'publisher', 'year'),

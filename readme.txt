@@ -4,7 +4,7 @@ Donate link: https://haozhexie.com/
 Tags: BibTeX, citation, paper
 Requires at least: 3.0.1
 Tested up to: 4.7
-Stable tag: 2.2.3
+Stable tag: 2.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,8 +48,8 @@ Currently, this plugin support following BibTeX entries types:
 
 *article*
 
-- **Required fields:** `type`, `title`, `author`, `journal`, `year`, `volume`
-- **Optional fields:** `number`, `pages`, `month`, `publisher`, `url`, `note`
+- **Required fields:** `type`, `title`, `author`, `journal`, `year`
+- **Optional fields:** `volume`, `number`, `pages`, `month`, `publisher`, `url`, `note`
 - **Short code example:** `[WpBibTeX type="article" title="Title of the citation" author="First Name1, Last Name1 and First Name2, Last Name2 and First Name3, Last Name3" journal="Journal Name of the citation" year="2016" volumne="1" impact_factor="The impact factor of the journal" url="The download link of the article"]`
 
 *book*
@@ -100,6 +100,9 @@ Researchers who need to display their publications in their homepage can use thi
 2. Options Page
 
 == Changelog ==
+
+= 2.2.4 =
+* Support arXiv publications.
 
 = 2.2.3 =
 * Fix bugs causing update failed.
