@@ -143,7 +143,7 @@ function wp_bibtex_option_page() {
                 </th>
                 <td>
                     <input id="blog-owner-name" name="blog_owner_name" class="regular-text" type="text" value="<?php echo $wp_bibtex_options['blog_owner_name']; ?>" />
-                    <p class="description"><? echo __('Your name will be highlighted with bold fonts in bibliography.', 'WP-BibTeX'); ?></p>
+                    <p class="description"><?php echo __('Your name will be highlighted with bold fonts in bibliography.', 'WP-BibTeX'); ?></p>
                 </td>
             </tr>
         </table> <!-- .form-table -->
@@ -170,10 +170,10 @@ function wp_bibtex_option_page() {
                 <div class="body">
                     <h5><?php echo __('Field Key', 'WP-BibTeX'); ?></h5>
                     <input name="additional_fields[<?php echo $index; ?>][key]" class="regular-text additional-field-key" type="text" value="<?php echo $additional_field_key; ?>" />
-                    <p class="description"><? echo __('The key of the field that used in the [WpBibTeX] shortcode. It can ONLY consists of characters and underlines.', 'WP-BibTeX'); ?></p>
+                    <p class="description"><?php echo __('The key of the field that used in the [WpBibTeX] shortcode. It can ONLY consists of characters and underlines.', 'WP-BibTeX'); ?></p>
                     <h5><?php echo __('Field Name', 'WP-BibTeX'); ?></h5>
                     <input name="additional_fields[<?php echo $index; ?>][value]" class="regular-text additional-field-value" type="text" value="<?php echo $additional_field_name; ?>" />
-                    <p class="description"><? echo __('The name of the link displayed in the page.', 'WP-BibTeX'); ?></p>
+                    <p class="description"><?php echo __('The name of the link displayed in the page.', 'WP-BibTeX'); ?></p>
                 </div> <!-- .body -->
             </li>
         <?php endforeach; ?>
@@ -209,10 +209,10 @@ function wp_bibtex_option_page() {
               '    <div class="body">' + 
               '        <h5><?php echo __('Field Key', 'WP-BibTeX'); ?></h5>' + 
               '        <input name="additional_fields[%s][key]" class="regular-text additional-field-key" type="text" />'.format(index) + 
-              '        <p class="description"><? echo __('The key of the field that used in the [WpBibTeX] shortcode. It can ONLY consists of characters and underlines.', 'WP-BibTeX'); ?></p>' +
+              '        <p class="description"><?php echo __('The key of the field that used in the [WpBibTeX] shortcode. It can ONLY consists of characters and underlines.', 'WP-BibTeX'); ?></p>' +
               '        <h5><?php echo __('Field Name', 'WP-BibTeX'); ?></h5>' + 
               '        <input name="additional_fields[%s][value]" class="regular-text additional-field-value" type="text" />'.format(index) + 
-              '        <p class="description"><? echo __('The name of the link displayed in the page.', 'WP-BibTeX'); ?></p>' + 
+              '        <p class="description"><?php echo __('The name of the link displayed in the page.', 'WP-BibTeX'); ?></p>' + 
               '    </div> <!-- .body -->' + 
               '</li>');
         });

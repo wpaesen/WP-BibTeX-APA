@@ -4,7 +4,7 @@ Donate link: https://haozhexie.com/
 Tags: BibTeX, citation, paper
 Requires at least: 3.0.1
 Tested up to: 4.8
-Stable tag: 2.2.4
+Stable tag: 2.2.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,9 @@ Researchers who need to display their publications in their homepage can use thi
 2. Options Page
 
 == Changelog ==
+
+= 2.2.5 =
+* Fix some bugs.
 
 = 2.2.4 =
 * Support arXiv publications.

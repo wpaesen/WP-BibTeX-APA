@@ -5,7 +5,7 @@
  * Description: A plugin helps format BibTeX entries to display a bibliography or cite citations in WordPress.
  * Author: Haozhe Xie
  * Author URI: https://haozhexie.com
- * Version: 2.2.4
+ * Version: 2.2.5
  * License: GPL v2.0
  */
 define('WP_BIBTEX_PLUGIN_PATH', plugin_dir_path(__FILE__));
