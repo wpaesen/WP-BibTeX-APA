@@ -249,18 +249,24 @@ function wp_bibtex_get_additional_fields($attrs) {
  */
 function wp_bibtex_get_bibtex_text($citation_key, $attrs) {
     global $BIBTEX_ENTRIES;
-    $citation_type      = $attrs['type'];
-    $required_fields    = $BIBTEX_ENTRIES[$citation_type]['required'];
-    $optional_fields    = $BIBTEX_ENTRIES[$citation_type]['optional'];
-    $bibtex_text        = sprintf("@%s{%s", $citation_type, $citation_key);
+    $BIBTEX_ESCAPE_CHARS    = array('&', '_');
+    $BIBTEX_ESCAPED_CHARS   = array('\&', '\_');
+
+    $citation_type          = $attrs['type'];
+    $required_fields        = $BIBTEX_ENTRIES[$citation_type]['required'];
+    $optional_fields        = $BIBTEX_ENTRIES[$citation_type]['optional'];
+    $bibtex_text            = sprintf("@%s{%s", $citation_type, $citation_key);
+
     foreach ( $required_fields as $field ) {
-        $bibtex_text   .= sprintf(",\n  %s={%s}", $field, $attrs[$field]);
+        $bibtex_text   .= sprintf(",\n  %s={%s}", $field, 
+            str_replace($BIBTEX_ESCAPE_CHARS, $BIBTEX_ESCAPED_CHARS, $attrs[$field]));
     }
     foreach ( $optional_fields as $field ) {
         if ( !array_key_exists($field, $attrs) ) {
             continue;
         }
-        $bibtex_text   .= sprintf(",\n  %s={%s}", $field, $attrs[$field]);
+        $bibtex_text   .= sprintf(",\n  %s={%s}", $field, 
+            str_replace($BIBTEX_ESCAPE_CHARS, $BIBTEX_ESCAPED_CHARS, $attrs[$field]));
     }
     $bibtex_text       .= sprintf("\n}");
     return $bibtex_text;
