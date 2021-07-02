@@ -42,7 +42,7 @@ $BIBTEX_ENTRIES = array(
     'phdthesis'         => array(
         'required'      => array('title', 'author', 'school', 'year'),
         'optional'      => array('month', 'address'),
-        'bibliography'  => '{{author}}. <em>{{title}}</em>. PhD thesis, {{school}}[, {{address}}][, {{month}}], {{year}}.[ {{note}}]',
+        'bibliography'  => '{{author}}. {{title}}. PhD thesis, {{school}}[, {{address}}][, {{month}}], {{year}}.[ {{note}}]',
     ),
     'unpublished'       => array(
         'required'      => array('title', 'author', 'year'),
