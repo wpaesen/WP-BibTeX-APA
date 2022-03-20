@@ -10,4 +10,11 @@
     padding: 12px;
     white-space: pre-wrap;
     word-wrap: break-word;
+    text-indent: 0;
 }
+
+.wpbibtex-reference {
+    text-indent: -3em;
+    padding-left: 3em;
+}
+

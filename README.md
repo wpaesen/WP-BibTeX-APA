@@ -34,6 +34,11 @@ And the shortcode above will generate following contents in a page:
   pages={165--172}
 }
 ```
+
+## Change for APA
+
+The changes introduced in the WP-BibTeX-APA repository makes the layout of references APA compliant.
+
 ## New Features in 2.x
 
 **In addition**, you can also customize links diaplayed in the page. By default, there're two links (`[BibTeX]` and `[Download PDF]`) for each citation. Now, you can add customized links in option page.

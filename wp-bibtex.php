@@ -5,7 +5,7 @@
  * Description: A plugin helps format BibTeX entries to display a bibliography or cite citations in WordPress.
  * Author: Haozhe Xie
  * Author URI: https://haozhexie.com
- * Version: 2.2.5
+ * Version: 2.2.6
  * License: GPL v2.0
  */
 define('WP_BIBTEX_PLUGIN_PATH', plugin_dir_path(__FILE__));
@@ -22,17 +22,17 @@ $BIBTEX_ENTRIES = array(
     'article'           => array(
         'required'      => array('title', 'author', 'journal', 'year'),
         'optional'      => array('number', 'pages', 'month', 'publisher'),
-        'bibliography'  => '{{author}}. {{title}}. <em>{{journal}}</em>[, {{volume}}][({{number}})][: {{pages}}][, {{month}}], {{year}}.[ {{note}}]',
+        'bibliography'  => '{{author}}. ({{year}}) {{title}}. <em>{{journal}}</em>[, {{volume}}][({{number}})][: {{pages}}][, {{month}}].[ {{note}}]',
     ),
     'book'              => array(
         'required'      => array('title', 'author', 'publisher', 'year'),
         'optional'      => array('volume', 'number', 'series', 'edition', 'month', 'address', 'isbn'),
-        'bibliography'  => '{{author}}. <em>{{title}}</em>.[ Vol. {{volume}}.] {{publisher}}[, {{address}}][, {{month}}], {{year}}.[ {{note}}]',
+        'bibliography'  => '{{author}}. ({{year}}) <em>{{title}}</em>.[ Vol. {{volume}}.] {{publisher}}[, {{address}}][, {{month}}].[ {{note}}]',
     ),
     'inproceedings'       => array(
         'required'      => array('title', 'author', 'booktitle', 'year'),
         'optional'      => array('volume', 'number', 'series', 'pages', 'month', 'organization', 'publisher', 'address'),
-        'bibliography'  => '{{author}}. {{title}}. <em>{{booktitle}}</em>[, Vol. {{volume}}][, pages {{pages}}][, {{address}}][, {{month}}], {{year}}.[ {{publisher}}.][ {{note}}]',
+        'bibliography'  => '{{author}}. ({{year}}) {{title}}. <em>{{booktitle}}</em>[, Vol. {{volume}}][, pages {{pages}}][, {{address}}][, {{month}}].[ {{publisher}}.][ {{note}}]',
     ),
     'mastersthesis'     => array(
         'required'      => array('title', 'author', 'school', 'year'),
@@ -42,7 +42,7 @@ $BIBTEX_ENTRIES = array(
     'phdthesis'         => array(
         'required'      => array('title', 'author', 'school', 'year'),
         'optional'      => array('month', 'address'),
-        'bibliography'  => '{{author}}. {{title}}. PhD thesis, {{school}}[, {{address}}][, {{month}}], {{year}}.[ {{note}}]',
+        'bibliography'  => '{{author}}. <em>{{title}}</em>. PhD thesis, {{school}}[, {{address}}][, {{month}}], {{year}}.[ {{note}}]',
     ),
     'unpublished'       => array(
         'required'      => array('title', 'author', 'year'),
@@ -64,14 +64,16 @@ function wp_bibtex_shortcode($attrs, $content=null) {
     }
 
     $citation_key    = wp_bibtex_get_citation_key($attrs);
-    $bibtex_content  = wp_bibtex_get_bibliography_text($attrs);
-    $bibtex_content .= '<div class="wpbibtex-item">';
+    $bibtex_content  = '<div class="wpbibtex-reference">';
+    $bibtex_content .= wp_bibtex_get_bibliography_text($attrs);
+    $bibtex_content .= '<span class="wpbibtex-item">';
     $bibtex_content .= '<a href="javascript:void(0);" class="wpbibtex-trigger">[BibTeX]</a> ';
     $bibtex_content .= wp_bibtex_get_additional_fields($attrs);
-    $bibtex_content .= '<div class="bibtex"><pre><code>';
+    $bibtex_content .= '<span class="bibtex"><pre><code>';
     $bibtex_content .= wp_bibtex_get_bibtex_text($citation_key, $attrs);
-    $bibtex_content .= '</code></pre></div> <!-- .bibtex -->';
-    $bibtex_content .= '</div> <!-- .wpbibtex-item -->';
+    $bibtex_content .= '</code></pre></span> <!-- .bibtex -->';
+    $bibtex_content .= '</span> <!-- .wpbibtex-item -->';
+    $bibtex_content .= '</div> <!-- .wpbibtex-reference -->';
     return $bibtex_content;
 }
 
@@ -208,13 +210,13 @@ function wp_bibtex_get_citation_authors_text($author) {
         $names          = explode(',', $author);
         $last_name      = trim($names[0]);
         $first_name     = count($names) < 2 ? '' : trim($names[1]);
-        $author_name    = sprintf("%s %s", $first_name, $last_name);
-        $author_text   .= $author_name. ', ';
+        $author_name    = sprintf("%s, %s", $last_name, $first_name);
+        $author_text   .= $author_name. ' & ';
     }
     return str_replace(
         $blog_owner_name, 
         sprintf('<strong>%s</strong>', $blog_owner_name), 
-        rtrim($author_text, ', ')
+        rtrim(rtrim($author_text, ' & '), '.')
     );
 }
 
